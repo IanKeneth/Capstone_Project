@@ -16,7 +16,9 @@ try {
 }
 
 // Security function to prevent "XSS" cross cite scripting attacks
-function e($text) {
-    return htmlspecialchars($text, ENT_QUOTES, 'UTF-8');
+if (!function_exists('e')) {
+    function e($text) {
+        return htmlspecialchars($text, ENT_QUOTES, 'UTF-8');
+    }
 }
 ?>

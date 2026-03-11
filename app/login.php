@@ -23,13 +23,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         //check if session actually saved, then redirect based on role
         if (isset($_SESSION['user_id'])) {
             if ($user['role'] === 'admin') {
-                header("Location: ../admin/index_admin.php");
+                header("Location: http://localhost:8000");
             } else {
                 header("Location: ../user/index.php");
             }
             exit;
         } else {
-            $error = "DEBUG: Login passed but SESSION failed to start.";
+            $error = "SESSION failed to start.";
         }
     }
 }
@@ -39,59 +39,94 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="login.css">
-    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Log-in Page</title>
+    <style>
+        *{
+    padding: 0;
+    margin: 0;
+    font-family: sans-serif;
+
+    }
+
+    body{
+        background-image:  url("../app/img/gm.jpg") ;
+        background-size: cover;
+
+    }
+
+    .login-form{
+        padding: 60px;
+        background-color:grey;
+        opacity: 0.8;
+        border-radius: 50px;
+        width: 330px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        position: absolute;
+        color:white;
+    }
+
+    .login-form h1{
+        font-size: 20px;
+        text-align: center;
+        text-transform: uppercase;
+        margin: 20px 0;
+    }
+
+    .login-form p{
+        font-size: 20px;
+        margin: 15px 0;
+    }
+
+    .login-form input{
+        font-size: 16px;
+        width: 90%;
+        padding: 10px 10px;
+        border: 0;
+        outline: none;
+        border-radius: 5px;
+    }
+
+    .login-form button{
+        font-size: 10;
+        font-weight: bold;
+        margin: 20px;width: 20px 0;
+        border-radius: 5px;
+        border: 0;
+        padding: 10px  15px;
+    }
+    a{
+        color: black;
+        background-color: white;
+        font-size:20px;
+        text-decoration: none;
+        margin: 5px;
+        width: 20px 0;
+        padding: 5px  10px;
+    }
+
+    </style>
 </head>
 <body>
-<section class="h-100vh gradient-form" style="background-color: #eee;">
-    <div class="container py-5 h-100">
-        <div class="row d-flex justify-content-center align-items-center h-100">
-            <div class="col-xl-10">
-                <div class="card rounded-3 text-black">
-                    <div class="row g-0">
-                        <div class="col-lg-6">
-                            <div class="card-body p-md-5 mx-md-4">
-                                <?php if(isset($error)): ?>
-                                    <div class="alert alert-danger p-2 small text-center"><?= $error ?></div>
-                                <?php endif; ?>
+    <div class = "login-form">
+        <h1>Login Your Account Here</h1>
+        <form action="login.php" method = "POST">
+            <p> <i class="fa fa-envelope-o"></i>Email</p>
+            <input type = "email" name = "email" placeholder="Enter Email" required>
 
-                                <form action="login.php" method="POST">
-                                    <p class="text-center mb-4">Please login to your account</p>
-                                    
-                                    <div data-mdb-input-init class="form-outline mb-4">
-                                        <input type="email" id="email" name="email" class="form-control" required />
-                                        <label class="form-label" for="email">Email</label>
-                                    </div>
-
-                                    <div data-mdb-input-init class="form-outline mb-4">
-                                        <input type="password" name="password" id="password" class="form-control" required />
-                                        <label class="form-label" for="password">Password</label>
-                                    </div>
-
-                                    <div class="text-center pt-1 mb-5 pb-1">
-                                        <button class="btn btn-primary btn-block gradient-custom-2 mb-3" type="submit">Log in</button>
-                                    </div>
-
-                                    <div class="d-flex align-items-center justify-content-center pb-4">
-                                        <p class="mb-0 me-2">Don't have an account?</p>
-                                        <a href="register.php" class="btn btn-outline-info">Create new</a>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
-                            <div class="text-white px-3 py-4 p-md-5 mx-md-4">
-                                <h4 class="mb-4">Intelligent Stock & Sales</h4>
-                                <p class="small mb-0">Real-time data for your cleaning distribution business.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <p> <i class="fa fa-key"></i>Password</p>
+            <input type="Password" name="password" placeholder="Enter Password" required>
+            </p>
+            <button type="submit">LOGIN</button>
+            <div>
+                <p>You D'ont have an Account?</p>
+                <a href="register.php">Register Here</a>
             </div>
-        </div>
+        </form>
     </div>
-</section>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.umd.min.js"></script>
+    
 </body>
 </html>

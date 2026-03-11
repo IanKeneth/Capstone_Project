@@ -1,118 +1,115 @@
 <?php
-require 'conn.php';
+require 'conn.php'; // conn.php already has session_start()
 
 $error = "";
 $success = "";
 
-//validate and sanitize input field
+// Handle form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Sanitize and trim inputs
     $name = htmlspecialchars(trim($_POST['name']));
     $email = filter_var(trim($_POST['email']), FILTER_VALIDATE_EMAIL);
-    $password = htmlspecialchars(trim($_POST['password']));
-    $confirm_password = htmlspecialchars(trim($_POST['confirm_password']));
+    $password = isset($_POST['password']) ? trim($_POST['password']) : '';
+    $confirm_password = isset($_POST['confirm_password']) ? trim($_POST['confirm_password']) : '';
 
-    //If passwords don't match, stop here.
-    if ($password !== $confirm_password) {
+    // Validate inputs
+    if (empty($name)) {
+        $error = "Full Name cannot be empty!";
+    } elseif (!$email) {
+        $error = "Invalid email address!";
+    } elseif (empty($password) || empty($confirm_password)) {
+        $error = "Password fields cannot be empty!";
+    } elseif ($password !== $confirm_password) {
         $error = "Passwords do not match!";
+    } elseif (strlen($password) < 6) {
+        $error = "Password must be at least 6 characters long!";
     } else {
-        //Check if the email is already use or taken by another user, We want unique emails for each account.
-        $check = $pdo->prepare("SELECT id FROM users WHERE email = ?");
-        $check->execute([$email]);
-        
-        if ($check->rowCount() > 0) {
-            $error = "This email is already registered!";
-        } else {
-            //  We force the role to user only .
-            $role = 'user';
-            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        try {
+            // Check if email already exists
+            $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
+            $stmt->execute([$email]);
 
-            // Insert user into the database using prepared statements to prevent SQL injection
-            $stmt = $pdo->prepare("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)");
-            if ($stmt->execute([$name, $email, $hashed_password, $role])) {
-                $success = "Registration successful! You can now log in.";
+            if ($stmt->rowCount() > 0) {
+                $error = "This email is already registered!";
             } else {
-                $error = "Something went wrong. Please try again.";
+                // Force role to 'user'
+                $role = 'user';
+                $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+                // Insert into database
+                $insert = $pdo->prepare("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, ?)");
+                if ($insert->execute([$name, $email, $hashed_password, $role])) {
+                    $success = "Registration successful! You can now log in.";
+                    // Clear POST data to prevent resubmission
+                    $_POST = [];
+                } else {
+                    $error = "Failed to register user: " . implode(", ", $insert->errorInfo());
+                }
             }
+        } catch (PDOException $e) {
+            $error = "Database error: " . $e->getMessage();
         }
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="login.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.min.css" rel="stylesheet" />
-    <title>Register - ISSA Portal</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register - ISSA Portal</title>
+<style>
+*{padding:0;margin:0;font-family:sans-serif;}
+body{background-image:url("../app/img/gm.jpg");background-size:cover;}
+.login-form{
+    padding:30px;
+    background-color:rgba(128,128,128,0.8);
+    border-radius:50px;
+    width:400px;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    position:absolute;
+    color:white;
+}
+.login-form h1{text-align:center;text-transform:uppercase;margin:20px 0;}
+.login-form input{font-size:16px;width:90%;padding:10px;border-radius:5px;border:0;outline:none;}
+.login-form button{font-size:16px;font-weight:bold;margin:20px 0;border-radius:5px;border:0;padding:10px 15px;}
+.login-form .btn a{color:black;background-color:white;text-decoration:none;padding:5px 10px;border-radius:5px;}
+.alert{padding:10px;margin-bottom:15px;border-radius:5px;}
+.alert-danger{background-color:#f8d7da;color:#842029;}
+.alert-success{background-color:#d1e7dd;color:#0f5132;}
+</style>
 </head>
 <body>
-<section class="h-100 gradient-form" style="background-color: #eee;">
-    <div class="container py-5">
-        <div class="row d-flex justify-content-center align-items-center">
-            <div class="col-xl-10">
-                <div class="card rounded-3 text-black">
-                    <div class="row g-0">
-                        
-                        <div class="col-lg-6 d-flex align-items-center gradient-custom-2 order-2 order-lg-1">
-                            <div class="text-white px-3 py-4 p-md-5 mx-md-4">
-                                <h4 class="mb-4">Intelligent Stock & Sales Analysis</h4>
-                                <p class="small mb-0">Optimize your cleaning distribution with real-time data. Our platform provides deep insights into inventory levels, sales trends, and supply chain efficiency.</p>
-                            </div>
-                        </div>
+<div class="login-form">
+    <?php if($error): ?>
+        <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
+    <?php endif; ?>
+    <?php if($success): ?>
+        <div class="alert alert-success"><?= htmlspecialchars($success) ?></div>
+    <?php endif; ?>
 
-                        <div class="col-lg-6 order-1 order-lg-2">
-                            <div class="card-body p-md-5 mx-md-4">
-                                <div class="text-center">
-                                    <h4 class="mt-1 mb-5 pb-1">Create an Account</h4>
-                                </div>
+    <h1>Register Your Account Here</h1>
+    <form action="register.php" method="POST">
+        <p>Full Name</p>
+        <input type="text" name="name" placeholder="Full Name" value="<?= isset($_POST['name']) ? htmlspecialchars($_POST['name']) : '' ?>" required>
 
-                                <?php if($error): ?> <div class="alert alert-danger py-2"><?= $error ?></div> <?php endif; ?>
-                                <?php if($success): ?> <div class="alert alert-success py-2"><?= $success ?></div> <?php endif; ?>
+        <p>Email</p>
+        <input type="email" name="email" placeholder="Enter Email" value="<?= isset($_POST['email']) ? htmlspecialchars($_POST['email']) : '' ?>" required>
 
-                                <form action="register.php" method="POST">
-                                    <p>Please fill in your details</p>
+        <p>Password</p>
+        <input type="password" name="password" placeholder="Enter Password" required>
 
-                                    <div data-mdb-input-init class="form-outline mb-4">
-                                        <input type="text" name="name" id="name" class="form-control" placeholder="Full Name" required />
-                                        <label class="form-label" for="name">Full Name</label>
-                                    </div>
+        <p>Confirm Password</p>
+        <input type="password" name="confirm_password" placeholder="Confirm Password" required>
 
-                                    <div data-mdb-input-init class="form-outline mb-4">
-                                        <input type="email" name="email" id="email" class="form-control" placeholder="Email Address" required />
-                                        <label class="form-label" for="email">Email</label>
-                                    </div>
-
-                                    <div data-mdb-input-init class="form-outline mb-4">
-                                        <input type="password" name="password" id="password" class="form-control" required />
-                                        <label class="form-label" for="password">Password</label>
-                                    </div>
-
-                                    <div data-mdb-input-init class="form-outline mb-4">
-                                        <input type="password" name="confirm_password" id="confirm_password" class="form-control" required />
-                                        <label class="form-label" for="confirm_password">Confirm Password</label>
-                                    </div>
-
-                                    <div class="text-center pt-1 mb-5 pb-1">
-                                        <button class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3" type="submit">Register</button>
-                                    </div>
-
-                                    <div class="d-flex align-items-center justify-content-center pb-4">
-                                        <p class="mb-0 me-2">Already have an account?</p>
-                                        <a href="login.php" class="btn btn-outline-info">Login</a>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        
-                    </div>
-                </div>
-            </div>
+        <button type="submit">REGISTER</button>
+        <div class="btn">
+            <p class="mb-0 me-2">Already have an account?</p>
+            <a href="login.php">Login</a>
         </div>
-    </div>
-</section>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/7.1.0/mdb.umd.min.js"></script>
+    </form>
+</div>
 </body>
 </html>
