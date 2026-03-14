@@ -1,10 +1,9 @@
 <?php
-require 'conn.php'; // conn.php already has session_start()
+require 'conn.php';
 
 $error = "";
 $success = "";
-
-// Handle form submission
+ 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Sanitize and trim inputs
     $name = htmlspecialchars(trim($_POST['name']));
@@ -32,7 +31,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($stmt->rowCount() > 0) {
                 $error = "This email is already registered!";
             } else {
-                // Force role to 'user'
+                // Force role to user
                 $role = 'user';
                 $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
