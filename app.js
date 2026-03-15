@@ -8,33 +8,35 @@ app.set('view engine', 'ejs');
 app.get('/', (req, res) => {
     res.render('index');
 });
-// This fixes the "Cannot GET /" error
+
 app.get('/index.ejs', (req, res) => {
     res.render('index');
 });
 
-app.get('/tables.ejs',(req, res)=>{
-    res.render('tables');
+app.get('/inventory.ejs',(req, res)=>{
+    res.render('inventory');
 })
 
-app.get('/product.ejs',(req, res)=>{
-    res.render('product');
+
+app.get('/supplies.ejs',(req, res)=>{
+    res.render('supplies');
 })
 
-app.get('/supply.ejs',(req, res)=>{
-    res.render('supply');
+app.get('/orders.ejs',(req, res)=>{
+    res.render('orders');
 })
 
-app.get('/sales.ejs',(req, res)=>{
-    res.render('sales');
+app.get('/reports.ejs',(req, res)=>{
+    res.render('reports');
 })
 
+app.get('/settings.ejs',(req, res)=>{
+    res.render('settings');
+})
 
 app.get('/logout', (req, res) => {
-    // If using express-session
     req.session.destroy((err) => {
-        // After destroying session, redirect back to the PHP login page
-        res.redirect('http://localhost/your_project/login.php');
+        res.redirect('http://localhost/capsotone/login.php');
     });
 });
 

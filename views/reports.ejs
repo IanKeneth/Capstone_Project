@@ -5,7 +5,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inventory Admin Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        .under-development {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 60vh;
+            text-align: center;
+            color: #4a5568;
+        }
+
+        .dev-container {
+            max-width: 400px;
+            padding: 2rem;
+        }
+
+        .dev-icon {
+            font-size: 4rem;
+            color: #3b82f6;
+            margin-bottom: 1.5rem;
+            animation: pulse 2s infinite;
+        }
+
+        .under-development h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: #1a202c;
+        }
+
+        .under-development p {
+            font-size: 1rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.8;
+        }
+
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
 </head>
 <body>
 
@@ -17,7 +59,7 @@
             </div>
 
             <nav>
-                <a href="index.ejs" class="nav-item active">
+                <a href="index.ejs" class="nav-item">
                     <i class="fa-solid fa-chart-line icon"></i> 
                     <span>Dashboard</span>
                 </a>
@@ -29,7 +71,7 @@
                     <i class="fa-solid fa-cart-shopping icon"></i> 
                     <span>Orders</span>
                 </a>
-                <a href="reports.ejs" class="nav-item">
+                <a href="reports.ejs" class="nav-item active">
                     <i class="fa-solid fa-file-invoice-dollar icon"></i> 
                     <span>Reports</span>
                 </a>
@@ -66,58 +108,19 @@
                 </div>
             </header>
 
-            <section class="analytics-row">
-                <div class="card sales-analytics">
-                    <h3><i class="fa-solid fa-chart-area" style="color: #f28c28; margin-right: 10px;"></i>Sales Analytics</h3>
-                    <div class="chart-placeholder">
-                        </div>
-                </div>
-
-                <div class="card sales-stat">
-                    <h3>Total Sales</h3>
-                    <div class="stat-value">$142,500</div>
-                    <div class="stat-change">
-                        <i class="fa-solid fa-arrow-trend-up"></i> +12% from last month
+           
+            <section class="under-development">
+                <div class="dev-container">
+                    <i class="fa-solid fa-code-compare dev-icon"></i>
+                    <h2>Section Under Development</h2>
+                    <p>We're currently building something awesome here. Check back soon!</p>
+                    <div class="progress-bar">
+                        <div class="progress-fill"></div>
                     </div>
                 </div>
             </section>
 
-            <section class="data-row">
-                <div class="card stock-levels">
-                    <h3><i class="fa-solid fa-layer-group" style="color: #f28c28; margin-right: 10px;"></i>Current Stock Level</h3>
-                    <ul>
-                        <li><span>Brooms</span> <strong>1500 units</strong></li>
-                        <li><span>Doormats</span> <strong>850 units</strong></li>
-                        <li><span>Brushes</span> <strong>2100 units</strong></li>
-                        <li><span>Buckets</span> <strong>1200 units</strong></li>
-                    </ul>
-                </div>
 
-                <div class="card recent-orders">
-                    <h3><i class="fa-solid fa-clock-rotate-left" style="color: #f28c28; margin-right: 10px;"></i>Recent Orders</h3>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Order ID</th>
-                                <th>Quantity</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>#CS001</td>
-                                <td>50 pcs</td>
-                                <td class="status-shipped"><i class="fa-solid fa-circle-check"></i> Shipped</td>
-                            </tr>
-                            <tr>
-                                <td>#CS002</td>
-                                <td>120 pcs</td>
-                                <td class="status-pending"><i class="fa-solid fa-circle-dot"></i> Pending</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
         </main>
     </div>
 

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory - Admin Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Extra styling for the specific inventory table layout */
+        .inventory-card {
+            background: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin: 20px;
+            padding: 20px;
+        }
+        .inventory-card h2 {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: #333;
+            margin-bottom: 25px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+        .inventory-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .inventory-table th {
+            background-color: #fdfdfd;
+            color: #666;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            padding: 15px;
+            border-bottom: 2px solid #f28c28;
+        }
+        .inventory-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+            text-align: center;
+        }
+        .inventory-table td:first-child, 
+        .inventory-table td:nth-child(2) {
+            text-align: left;
+        }
+        .stock-bar-container {
+            background: #eee;
+            border-radius: 10px;
+            height: 8px;
+            width: 100px;
+            display: inline-block;
+            margin-right: 10px;
+            overflow: hidden;
+        }
+        .stock-bar {
+            background: #f28c28;
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <i class="fa-solid fa-boxes-stacked"></i> 
+                <span>Title</span>
+            </div>
+
+            <nav>
+                <a href="index.ejs" class="nav-item">
+                    <i class="fa-solid fa-chart-line icon"></i> 
+                    <span>Dashboard</span>
+                </a>
+                <a href="inventory.ejs" class="nav-item active">
+                    <i class="fa-solid fa-boxes-packing icon"></i> 
+                    <span>Inventory</span>
+                </a>
+                <a href="orders.ejs" class="nav-item">
+                    <i class="fa-solid fa-cart-shopping icon"></i> 
+                    <span>Orders</span>
+                </a>
+                <a href="reports.ejs" class="nav-item">
+                    <i class="fa-solid fa-file-invoice-dollar icon"></i> 
+                    <span>Reports</span>
+                </a>
+                <a href="supplies.ejs" class="nav-item">
+                    <i class="fa-solid fa-truck-ramp-box icon"></i> 
+                    <span>Supplies</span>
+                </a>
+                <a href="settings.ejs" class="nav-item">
+                    <i class="fa-solid fa-gears icon"></i> 
+                    <span>Settings</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <a href="http://localhost/capstone/app/login.php" class="nav-item">
+                    <i class="fa-solid fa-right-from-bracket icon"></i> 
+                    <span>Logout</span>
+                </a>
+            </div>
+
+        </aside>
+
+        <main class="main-content">
+            <header class="header">
+                <div class="header-left">
+                    <button id="sidebarToggle" class="hamburger-btn">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+                    <h1>Inventory Management</h1>
+                </div>
+                <div class="user-profile">
+                    <i class="fa-solid fa-circle-user"></i>
+                </div>
+            </header>
+
+            <section class="inventory-container">
+                <div class="inventory-card">
+                    <h2><i class="fa-solid fa-share-nodes"></i> View Current Stock Levels</h2>
+                    
+                    <table class="inventory-table">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Product Name</th>
+                                <th>SKU</th>
+                                <th>Retailer Qty</th>
+                                <th>Remaining Stock %</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Brooms (Standard)</td>
+                                <td>BRM-002</td>
+                                <td>300</td>
+                                <td><div class="stock-bar-container"><div class="stock-bar" style="width: 38%;"></div></div> 38%</td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Mops (String)</td>
+                                <td>MOP-005</td>
+                                <td>150</td>
+                                <td><div class="stock-bar-container"><div class="stock-bar" style="width: 20%;"></div></div> 20%</td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Brooms (Heavy)</td>
+                                <td>BRM-05B</td>
+                                <td>200</td>
+                                <td><div class="stock-bar-container"><div class="stock-bar" style="width: 38%;"></div></div> 38%</td>
+                            </tr>
+                            <tr>
+                                <td>4</td>
+                                <td>Buckets (5-Gal Blue)</td>
+                                <td>BKT-05B</td>
+                                <td>300</td>
+                                <td><div class="stock-bar-container"><div class="stock-bar" style="width: 80%;"></div></div> 80%</td>
+                            </tr>
+                            <tr>
+                                <td>5</td>
+                                <td>Buckets (5-Gal Red)</td>
+                                <td>BKT-05R</td>
+                                <td>700</td>
+                                <td><div class="stock-bar-container"><div class="stock-bar" style="width: 75%;"></div></div> 75%</td>
+                            </tr>
+                            <tr>
+                                <td>6</td>
+                                <td>Doormat (Standard)</td>
+                                <td>MAT-001</td>
+                                <td>450</td>
+                                <td><div class="stock-bar-container"><div class="stock-bar" style="width: 90%;"></div></div> 90%</td>
+                            </tr>
+                            <tr>
+                                <td>7</td>
+                                <td>Brush (Long Handle)</td>
+                                <td>BRS-001</td>
+                                <td>400</td>
+                                <td><div class="stock-bar-container"><div class="stock-bar" style="width: 32%;"></div></div> 32%</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        const sidebar = document.querySelector('.sidebar');
+        const toggleBtn = document.getElementById('sidebarToggle');
+
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+        });
+    </script>
+</body>
+</html>
