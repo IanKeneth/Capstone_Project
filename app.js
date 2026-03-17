@@ -36,7 +36,12 @@ app.get('/settings.ejs',(req, res)=>{
 
 app.get('/logout', (req, res) => {
     req.session.destroy((err) => {
+        if (err) {
+            console.error('Error destroying session:', err);
+            return res.status(500).send('An error occurred while logging out.');
+        }else{
         res.redirect('http://localhost/capsotone/login.php');
+        }
     });
 });
 

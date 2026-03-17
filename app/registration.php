@@ -1,6 +1,5 @@
 <?php
 require 'conn.php'; 
-$error = ""; $success = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $name = htmlspecialchars(trim($_POST['name']));
@@ -9,19 +8,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $confirm_password = trim($_POST['confirm_password'] ?? '');
 
     if (empty($name) || !$email || strlen($password) < 6) {
-        $error = "Please check your inputs. Password must be 6+ chars.";
+        ?>
+        <script>
+            alert("Please check your inputs. Password must be 6+ chars.");  
+        </script>   
+        <?php
+
     } elseif ($password !== $confirm_password) {
-        $error = "Passwords do not match!";
+        ?>
+        <script>
+            alert("Passwords do not match!");
+        </script>
+        <?php
+    //check if email already exists
     } else {
         $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
         $stmt->execute([$email]);
         if ($stmt->rowCount() > 0) {
-            $error = "Email already registered!";
+            ?>
+            <script>
+                alert("Email already registered!");
+            </script>
+            <?php
+
         } else {
             $hashed = password_hash($password, PASSWORD_DEFAULT);
             $insert = $pdo->prepare("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, 'user')");
             if ($insert->execute([$name, $email, $hashed])) {
-                $success = "Registration successful";
+                ?>
+                <script>
+                    alert("Registration successful! Please login.");
+                    window.location.href = 'login.php';
+                </script>
+                <?php
             }
         }
     }
@@ -44,14 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="avatar-circle">
                     <i class="fa-solid fa-user-plus person-icon"></i>
                 </div>
-            </div>
-            <?php if ($error): ?>
-                <div class="alert alert-error"><?php echo $error; ?></div>
-            <?php endif; ?>
-            <?php if ($success): ?>
-                <div class="alert alert-success"><?php echo $success; ?></div>
-            <?php endif; ?>
-            
+            </div>         
             <h2 class="auth-title">Create Account</h2>
             <p class="auth-subtitle">Join us to start managing your inventory.</p>
             

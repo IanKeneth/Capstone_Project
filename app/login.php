@@ -1,6 +1,5 @@
 <?php
 require 'conn.php';
-$error = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = filter_var(trim($_POST['email']), FILTER_VALIDATE_EMAIL);
@@ -17,13 +16,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         // Redirect based on role
         if ($user['role'] === 'admin') {
-            header("Location: http://localhost:8000");
+            ?>
+            <script>
+                alert("Welcome Admin!");
+                window.location.href = 'http://localhost:8000';
+            </script>
+            <?php
         } else {
-            header("Location: ../user/index.php");
+            ?>
+            <script>
+                window.location.href = '../user/index.php';
+            </script>
+            <?php
         }
         exit;
     } else {
-        $error = "Invalid email or password.";
+        ?>
+        <script>
+            alert("Invalid email or password. Please try again.");
+        </script>
+        <?php
     }
 }
 ?>
