@@ -6,42 +6,53 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = filter_var(trim($_POST['email']), FILTER_VALIDATE_EMAIL);
     $password = trim($_POST['password'] ?? '');
     $confirm_password = trim($_POST['confirm_password'] ?? '');
+    $passwordPattern = "/^(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$/";
 
-    if (empty($name) || !$email || strlen($password) < 6) {
+    if (empty($name) || !$email) {
         ?>
-        <script>
-            alert("Please check your inputs. Password must be 6+ chars.");  
-        </script>   
+        <script>alert("Please fill in all fields.");</script>
         <?php
-
-    } elseif ($password !== $confirm_password) {
+    }
+    elseif (!preg_match($passwordPattern, $password)) {
         ?>
         <script>
-            alert("Passwords do not match!");
+            alert("Password too weak! Must be at least 8 characters or more and include special characters and numbers");
         </script>
         <?php
-    //check if email already exists
+    }
+    elseif ($password !== $confirm_password) {
+        ?>
+        <script>alert("Passwords do not match!");</script>
+        <?php
     } else {
-        $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
-        $stmt->execute([$email]);
-        if ($stmt->rowCount() > 0) {
+        try{
+            // Check if email already exists
+            $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
+            $stmt->execute([$email]);
+            
+            if ($stmt->rowCount() > 0) {
+                ?>
+                <script>alert("Email already registered!");</script>
+                <?php
+            } else {
+                $hashed = password_hash($password, PASSWORD_DEFAULT);
+                $insert = $pdo->prepare("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, 'staff')");
+                if ($insert->execute([$name, $email, $hashed])) {
+                    ?>
+                    <script>
+                        alert("Registration successful! Please login.");
+                        window.location.href = 'login.php';
+                    </script>
+                    <?php
+                }
+            }
+        } catch (PDOException $e) {
+            error_log("DB Error: " . $e->getMessage());
             ?>
             <script>
-                alert("Email already registered!");
-            </script>
+                alert("Sorry we are having technical issues");
+            </script>"
             <?php
-
-        } else {
-            $hashed = password_hash($password, PASSWORD_DEFAULT);
-            $insert = $pdo->prepare("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, 'user')");
-            if ($insert->execute([$name, $email, $hashed])) {
-                ?>
-                <script>
-                    alert("Registration successful! Please login.");
-                    window.location.href = 'login.php';
-                </script>
-                <?php
-            }
         }
     }
 }

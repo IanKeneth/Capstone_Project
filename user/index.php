@@ -1,11 +1,54 @@
+<?php
+session_start();
+require "../app/conn.php";
+
+
+if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
+    header("Location: ../app/login.php");
+    exit();
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inventory Admin Dashboard</title>
+    <title>Staff Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../user/css/style.css">
+
+    <style>
+        /* CSS to match your reference image */
+
+
+        .sidebar { background-color: var(--primary-orange); color: black; display: flex; flex-direction: column; }
+        .sidebar-profile { text-align: center; padding: 30px 10px; border-bottom: 1px solid rgba(255,255,255,0.2); }
+        .profile-img { width: 70px; height: 70px; background: white; border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; color: var(--primary-orange); font-size: 35px; }
+        .sidebar-profile h3 { font-size: 1.2rem; letter-spacing: 2px; margin: 0; }
+        
+
+        /* Gauge / Analytics Styling */
+        .quick-overview { margin-bottom: 25px; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; }
+        .card-header { background: #fff; padding: 15px; border-bottom: 1px solid #eee; display: flex; align-items: center; gap: 10px; color: #555; }
+        
+        .gauge-container { display: flex; justify-content: space-around; padding: 25px; background: #fff; flex-wrap: wrap; gap: 20px; }
+        .gauge-item { text-align: center; flex: 1; min-width: 120px; }
+        .gauge-circle { width: 120px; height: 60px; border: 10px solid #eee; border-bottom: 0; border-radius: 120px 120px 0 0; position: relative; display: flex; align-items: flex-end; justify-content: center; margin: 0 auto 10px; }
+        .gauge-circle span { font-weight: bold; font-size: 1.2rem; position: relative; top: 5px; }
+        
+        .blue { border-top-color: #3498db; border-left-color: #3498db; }
+        .red { border-top-color: #e74c3c; }
+        .yellow { border-top-color: #f1c40f; border-right-color: #f1c40f; }
+        .green { border-top-color: #2ecc71; border-right-color: #2ecc71; border-left-color: #2ecc71;}
+
+        /* Detailed Table Styling */
+        .inventory-list-card { background: white; border: 1px solid #ddd; border-radius: 8px; }
+        .inventory-table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        .inventory-table th { background: #fff; color: #888; text-align: left; padding: 12px; border-bottom: 2px solid #eee; font-size: 0.9rem; }
+        .inventory-table td { padding: 12px; border-bottom: 1px solid #eee; font-size: 0.95rem; color: #444; }
+        .status-reorder { color: #e74c3c; font-weight: bold; }
+        .status-normal { color: #2ecc71; font-weight: bold; }
+    </style>
 </head>
 <body>
 
@@ -16,41 +59,39 @@
                 <span>Title</span>
             </div>
 
-            <nav>
-                <a href="index.ejs" class="nav-item active">
-                    <i class="fa-solid fa-chart-line icon"></i> 
+            <nav style="flex-grow: 1;">
+                <a href="index.php" class="nav-item active">
+                    <i class="fa-solid fa-table-columns"></i> 
                     <span>Dashboard</span>
                 </a>
-                <a href="inventory.ejs" class="nav-item">
-                    <i class="fa-solid fa-boxes-packing icon"></i> 
-                    <span>Inventory</span>
+                <a href="transfer_request.php" class="nav-item ">
+                    <i class="fa-solid fa-right-left"></i> 
+                    <span>Transfer Request</span>
                 </a>
-                <a href="orders.ejs" class="nav-item">
-                    <i class="fa-solid fa-cart-shopping icon"></i> 
-                    <span>Orders</span>
+                <a href="track_status.php" class="nav-item">
+                    <i class="fa-solid fa-arrows-spin"></i> 
+                    <span>Track Status</span>
                 </a>
-                <a href="reports.ejs" class="nav-item">
-                    <i class="fa-solid fa-file-invoice-dollar icon"></i> 
-                    <span>Reports</span>
+                <a href="basic_updates.php" class="nav-item">
+                    <i class="fa-solid fa-pen-to-square"></i> 
+                    <span>Basic Updates</span>
                 </a>
-                <a href="supplies.ejs" class="nav-item">
-                    <i class="fa-solid fa-truck-ramp-box icon"></i> 
-                    <span>Supplies</span>
+                <a href="sales.php" class="nav-item">
+                    <i class="fa-solid fa-chart-simple"></i> 
+                    <span>Sales</span>
                 </a>
-                <a href="settings.ejs" class="nav-item">
-                    <i class="fa-solid fa-gears icon"></i> 
-                    <span>Settings</span>
+                <a href="settings.php" class="nav-item">
+                    <i class="fa-solid fa-user-gear"></i> 
+                    <span>Profile</span>
                 </a>
             </nav>
 
             <div class="sidebar-footer">
-                <a href="http://localhost/capstone/app/login.php" class="nav-item">
-                    <i class="fa-solid fa-right-from-bracket icon"></i> 
+                <a href="../app/logout.php" class="nav-item">
+                    <i class="fa-solid fa-right-from-bracket"></i> 
                     <span>Logout</span>
                 </a>
             </div>
-
-
         </aside>
 
         <main class="main-content">
@@ -66,53 +107,82 @@
                 </div>
             </header>
 
-            <section class="analytics-row">
-                <div class="card sales-analytics">
-                    <h3><i class="fa-solid fa-chart-area" style="color: #f28c28; margin-right: 10px;"></i>Sales Analytics</h3>
-                    <div class="chart-placeholder">
-                        </div>
+            <section class="quick-overview">
+                <div class="card-header">
+                    <i class="fa-solid fa-layer-group" style="color: var(--primary-orange);"></i>
+                    <strong>Quick Inventory Overview</strong>
                 </div>
-
-                <div class="card sales-stat">
-                    <h3>Total Sales</h3>
-                    <div class="stat-value">$142,500</div>
-                    <div class="stat-change">
-                        <i class="fa-solid fa-arrow-trend-up"></i> +12% from last month
+                <div class="gauge-container">
+                    <div class="gauge-item">
+                        <div class="gauge-circle blue"><span>15,340</span></div>
+                        <p>TOTAL Units</p>
+                    </div>
+                    <div class="gauge-item">
+                        <div class="gauge-circle red"><span>87</span></div>
+                        <p>LOW Stock</p>
+                    </div>
+                    <div class="gauge-item">
+                        <div class="gauge-circle yellow"><span>$212,500</span></div>
+                        <p>STOCK VALUE</p>
+                    </div>
+                    <div class="gauge-item">
+                        <div class="gauge-circle green"><span>+45</span></div>
+                        <p>UPDATES (24h)</p>
                     </div>
                 </div>
             </section>
 
-            <section class="data-row">
-                <div class="card stock-levels">
-                    <h3><i class="fa-solid fa-layer-group" style="color: #f28c28; margin-right: 10px;"></i>Current Stock Level</h3>
-                    <ul>
-                        <li><span>Brooms</span> <strong>1500 units</strong></li>
-                        <li><span>Doormats</span> <strong>850 units</strong></li>
-                        <li><span>Brushes</span> <strong>2100 units</strong></li>
-                        <li><span>Buckets</span> <strong>1200 units</strong></li>
-                    </ul>
+            <section class="inventory-list-card">
+                <div class="card-header">
+                    <i class="fa-solid fa-file-lines" style="color: var(--primary-orange);"></i>
+                    <strong>Detailed Inventory List</strong>
                 </div>
-
-                <div class="card recent-orders">
-                    <h3><i class="fa-solid fa-clock-rotate-left" style="color: #f28c28; margin-right: 10px;"></i>Recent Orders</h3>
-                    <table>
+                <div style="padding: 0 15px 15px 15px;">
+                    <table class="inventory-table">
                         <thead>
                             <tr>
-                                <th>Order ID</th>
-                                <th>Quantity</th>
-                                <th>Status</th>
+                                <th>ITEM ID</th>
+                                <th>ITEM NAME</th>
+                                <th>CATEGORY</th>
+                                <th>ON HAND</th>
+                                <th>LOW STOCK ALERT</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td>#CS001</td>
-                                <td>50 pcs</td>
-                                <td class="status-shipped"><i class="fa-solid fa-circle-check"></i> Shipped</td>
+                                <td>001</td>
+                                <td>Microfiber Mop</td>
+                                <td>Mops</td>
+                                <td>150</td>
+                                <td class="status-normal">NORMAL</td>
                             </tr>
                             <tr>
-                                <td>#CS002</td>
-                                <td>120 pcs</td>
-                                <td class="status-pending"><i class="fa-solid fa-circle-dot"></i> Pending</td>
+                                <td>002</td>
+                                <td>Doormat (Large)</td>
+                                <td>Doormat</td>
+                                <td>20</td>
+                                <td class="status-reorder">REORDER</td>
+                            </tr>
+                            <tr>
+                                <td>003</td>
+                                <td>Utility Brush</td>
+                                <td>Brush</td>
+                                <td>50</td>
+                                <td class="status-reorder">REORDER</td>
+                            </tr>
+                            <tr>
+                                <td>004</td>
+                                <td>Brooms (Heavy)</td>
+                                <td>Brooms</td>
+                                <td>200</td>
+                                <td class="status-normal">NORMAL</td>
+                            </tr>
+                            <tr>
+                                <td>005</td>
+                                <td>Bucket (Large)</td>
+                                <td>Buckets</td>
+                                <td>170</td>
+                                <td class="status-normal">NORMAL</td>
                             </tr>
                         </tbody>
                     </table>
@@ -122,12 +192,12 @@
     </div>
 
     <script>
-    const sidebar = document.querySelector('.sidebar');
-    const toggleBtn = document.getElementById('sidebarToggle');
+        const sidebar = document.querySelector('.sidebar');
+        const toggleBtn = document.getElementById('sidebarToggle');
 
-    toggleBtn.addEventListener('click', () => {
-        sidebar.classList.toggle('collapsed');
-    });
-</script>
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('collapsed');
+        });
+    </script>
 </body>
 </html>

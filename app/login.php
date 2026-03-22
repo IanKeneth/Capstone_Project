@@ -1,39 +1,50 @@
 <?php
+session_start();
 require 'conn.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = filter_var(trim($_POST['email']), FILTER_VALIDATE_EMAIL);
-    $password = $_POST['password'] ?? '';
+    $password = trim($_POST['password']) ?? '';
 
-    $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
-    $stmt->execute([$email]);
-    $user = $stmt->fetch();
+    try{
+        $stmt = $pdo->prepare("SELECT * FROM users WHERE email = ?");
+        $stmt->execute([$email]);
+        $user = $stmt->fetch();
 
-    if ($user && password_verify($password, $user['password'])) {
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['role'] = $user['role'];
-        $_SESSION['name'] = $user['name'];
+        if ($user && password_verify($password, $user['password'])) {
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['role'] = $user['role'];
+            $_SESSION['name'] = $user['name'];
 
-        // Redirect based on role
-        if ($user['role'] === 'admin') {
-            ?>
-            <script>
-                alert("Welcome Admin!");
-                window.location.href = 'http://localhost:8000';
-            </script>
-            <?php
+            // Redirect based on role
+            if ($user['role'] === 'admin') {
+                ?>
+                <script>
+                    alert("Welcome Admin!");
+                    window.location.href = 'http://localhost:8000';
+                </script>
+                <?php
+            } else {
+                ?>
+                <script>
+                    alert("Welcome staff");
+                    window.location.href = '../user/index.php';
+                </script>
+                <?php
+            }
+            exit;
         } else {
             ?>
             <script>
-                window.location.href = '../user/index.php';
+                alert("Invalid email or password. Please try again.");
             </script>
             <?php
         }
-        exit;
-    } else {
+    }catch(PDOException $e){
+        error_log("DB Error: " . $e->getMessage());
         ?>
         <script>
-            alert("Invalid email or password. Please try again.");
+            alert("Sorry we are having technical issues");
         </script>
         <?php
     }
@@ -77,7 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <a href="#" class="forgot-link">Forgot password?</a>
                 </div>
 
-                <button type="submit" class="btn-primary">Register</button>
+                <button type="submit" class="btn-primary">Login</button>
             </form>
 
             <div class="auth-footer">

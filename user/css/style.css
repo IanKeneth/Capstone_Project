@@ -27,6 +27,15 @@ body {
 .sidebar.collapsed {
     width: 75px;
 }
+/* Ensure this is in your <style> tag */
+.sidebar.collapsed {
+    width: 60px;
+    overflow: hidden;
+}
+
+.main-content.expanded {
+    margin-left: 60px;
+}
 
 .sidebar-header {
     height: 70px;
@@ -70,6 +79,9 @@ nav {
     background-color: #fff5eb;
     color: #f28c28;
     border-right: 4px solid #f28c28; 
+}
+.nav-item.active i {
+    color: var(--primary-orange); /* Makes the icon orange too */
 }
 
 .sidebar span {
