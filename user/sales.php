@@ -11,7 +11,7 @@ if (!isset($_SESSION['user_id'])) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sales - Staff Dashboard</title>
+    <title>Sales</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../user/css/style.css">
     <style>
@@ -127,8 +127,8 @@ if (!isset($_SESSION['user_id'])) {
                             <td><strong>Brooms</strong></td>
                             <td>John</td>
                             <td>2 unit</td>
-                            <td class="price-text">₱150.00</td>
-                            <td class="amount-text">₱300.00</td>
+                            <td class="price-text">150.00</td>
+                            <td class="amount-text">300.00</td>
                             <td>2026-03-22</td>
                         </tr>
                         <tr>
@@ -136,8 +136,8 @@ if (!isset($_SESSION['user_id'])) {
                             <td><strong>Doormats</strong></td>
                             <td>Doe</td>
                             <td>3 units</td>
-                            <td class="price-text">₱120.00</td>
-                            <td class="amount-text">₱360.00</td>
+                            <td class="price-text">120.00</td>
+                            <td class="amount-text">360.00</td>
                             <td>2026-03-22</td>
                         </tr>
                         <tr>
@@ -145,8 +145,8 @@ if (!isset($_SESSION['user_id'])) {
                             <td><strong>Brushes</strong></td>
                             <td>han</td>
                             <td>4 units</td>
-                            <td class="price-text">₱75.00</td>
-                            <td class="amount-text">₱300.00</td>
+                            <td class="price-text">75.00</td>
+                            <td class="amount-text">300.00</td>
                             <td>2026-03-21</td>
                         </tr>
                         <tr>
@@ -154,8 +154,8 @@ if (!isset($_SESSION['user_id'])) {
                             <td><strong>Buckets</strong></td>
                             <td>Hoe</td>
                             <td>5 units</td>
-                            <td class="price-text">₱200.00</td>
-                            <td class="amount-text">₱1000.00</td>
+                            <td class="price-text">200.00</td>
+                            <td class="amount-text">1000.00</td>
                             <td>2026-03-20</td>
                         </tr>
                     </tbody>

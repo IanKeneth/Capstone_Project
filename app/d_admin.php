@@ -2,7 +2,7 @@
  try { 
     $name = "Admin";
     $email = "admin@gmail.com";
-    $password = "Admin123";
+    $password = "Admin@123";
     $role = "admin";
 
     $password = password_hash($password, PASSWORD_DEFAULT);

@@ -18,9 +18,6 @@ if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
     <link rel="stylesheet" href="../user/css/style.css">
 
     <style>
-        /* CSS to match your reference image */
-
-
         .sidebar { background-color: var(--primary-orange); color: black; display: flex; flex-direction: column; }
         .sidebar-profile { text-align: center; padding: 30px 10px; border-bottom: 1px solid rgba(255,255,255,0.2); }
         .profile-img { width: 70px; height: 70px; background: white; border-radius: 50%; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; color: var(--primary-orange); font-size: 35px; }
@@ -114,7 +111,7 @@ if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
                 </div>
                 <div class="gauge-container">
                     <div class="gauge-item">
-                        <div class="gauge-circle blue"><span>15,340</span></div>
+                        <div class="gauge-circle blue"><span>1000</span></div>
                         <p>TOTAL Units</p>
                     </div>
                     <div class="gauge-item">
@@ -122,7 +119,7 @@ if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
                         <p>LOW Stock</p>
                     </div>
                     <div class="gauge-item">
-                        <div class="gauge-circle yellow"><span>$212,500</span></div>
+                        <div class="gauge-circle yellow"><span>5000</span></div>
                         <p>STOCK VALUE</p>
                     </div>
                     <div class="gauge-item">

@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <?php
             } else {
                 $hashed = password_hash($password, PASSWORD_DEFAULT);
-                $insert = $pdo->prepare("INSERT INTO users (name, email, password, role) VALUES (?, ?, ?, 'staff')");
+                $insert = $pdo->prepare("INSERT INTO users (name, email, password) VALUES (?, ?, ?)");
                 if ($insert->execute([$name, $email, $hashed])) {
                     ?>
                     <script>
