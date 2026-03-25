@@ -60,32 +60,40 @@
                 <i class="fa-solid fa-boxes-stacked"></i> 
                 <span>Title</span>
             </div>
-            <nav style="flex-grow: 1;">
-                    <a href="index.php" class="nav-item ">
-                        <i class="fa-solid fa-table-columns"></i> 
-                        <span>Dashboard</span>
-                    </a>
-                    <a href="transfer_request.php" class="nav-item active">
-                        <i class="fa-solid fa-right-left"></i> 
-                        <span>Transfer Request</span>
-                    </a>
-                    <a href="track_status.php" class="nav-item">
-                        <i class="fa-solid fa-arrows-spin"></i> 
-                        <span>Track Status</span>
-                    </a>
-                    <a href="basic_updates.php" class="nav-item">
-                        <i class="fa-solid fa-pen-to-square"></i> 
-                        <span>Basic Updates</span>
-                    </a>
-                    <a href="sales.php" class="nav-item">
-                        <i class="fa-solid fa-chart-simple"></i> 
-                        <span>Sales</span>
-                    </a>
-                    <a href="settings.php" class="nav-item">
-                        <i class="fa-solid fa-user-gear"></i> 
-                        <span>Profile</span>
-                    </a>
-                </nav>
+             <nav style="flex-grow: 1;">
+                <a href="index.php" class="nav-item ">
+                    <i class="fa-solid fa-table-columns"></i> 
+                    <span>Dashboard</span>
+                </a>
+                <a href="transfer_request.php" class="nav-item active">
+                    <i class="fa-solid fa-right-left"></i> 
+                    <span>Transfer Request</span>
+                </a>
+                <a href="track_status.php" class="nav-item">
+                    <i class="fa-solid fa-arrows-spin"></i> 
+                    <span>Track Status</span>
+                </a>
+                <a href="basic_updates.php" class="nav-item ">
+                    <i class="fa-solid fa-pen-to-square"></i> 
+                    <span>Basic Updates</span>
+                </a>
+                 <a href="orders.php" class="nav-item">
+                    <i class="fa-solid fa-pen-to-square"></i> 
+                    <span>Order</span>
+                </a>
+                <a href="sales.php" class="nav-item">
+                    <i class="fa-solid fa-chart-simple"></i> 
+                    <span>Sales</span>
+                </a>
+                <a href="supplies.php" class="nav-item ">
+                    <i class="fa-solid fa-truck-ramp-box icon"></i> 
+                    <span>Supplies</span>
+                </a>
+                <a href="settings.php" class="nav-item">
+                    <i class="fa-solid fa-user-gear"></i> 
+                    <span>Profile</span>
+                </a>
+            </nav>
                 <div class="sidebar-footer">
                     <a href="../app/logout.php" class="nav-item">
                         <i class="fa-solid fa-right-from-bracket icon"></i> <span>Logout</span>

@@ -56,12 +56,12 @@ if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
                 <span>Title</span>
             </div>
 
-            <nav style="flex-grow: 1;">
-                <a href="index.php" class="nav-item active">
+             <nav style="flex-grow: 1;">
+                <a href="index.php" class="nav-item active ">
                     <i class="fa-solid fa-table-columns"></i> 
                     <span>Dashboard</span>
                 </a>
-                <a href="transfer_request.php" class="nav-item ">
+                <a href="transfer_request.php" class="nav-item">
                     <i class="fa-solid fa-right-left"></i> 
                     <span>Transfer Request</span>
                 </a>
@@ -73,6 +73,10 @@ if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
                     <i class="fa-solid fa-pen-to-square"></i> 
                     <span>Basic Updates</span>
                 </a>
+                <a href="orders.php" class="nav-item">
+                    <i class="fa-solid fa-pen-to-square"></i> 
+                    <span>Order</span>
+                </a>
                 <a href="sales.php" class="nav-item">
                     <i class="fa-solid fa-chart-simple"></i> 
                     <span>Sales</span>
@@ -80,6 +84,10 @@ if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
                 <a href="products.php" class="nav-item">
                     <i class="fa-solid fa-cart-plus"></i> 
                     <span>Add Products</span>
+                </a>
+                <a href="supplies.php" class="nav-item ">
+                    <i class="fa-solid fa-truck-ramp-box icon"></i> 
+                    <span>Supplies</span>
                 </a>
                 <a href="settings.php" class="nav-item">
                     <i class="fa-solid fa-user-gear"></i> 

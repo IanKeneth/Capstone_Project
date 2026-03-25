@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Orders - Admin Dashboard</title>
+    <title>Orders </title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="../user/css/style.css">
     <style>
         .order-section { padding: 20px; }
         
@@ -59,6 +59,38 @@
             cursor: pointer;
             font-weight: bold;
         }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+
+        .modal-content {
+            background: #fff;
+            margin: 10% auto;
+            padding: 20px;
+            width: 400px;
+            border-radius: 10px;
+        }
+
+        .modal-content input,
+        .modal-content select {
+            width: 98%;
+            padding: 8px;
+            margin: 5px 0 10px;
+            
+        }
+
+        .close {
+            float: right;
+            cursor: pointer;
+            font-size: 20px;
+        }
     </style>
 </head>
 <body>
@@ -70,30 +102,38 @@
                 <span>Title</span>
             </div>
 
-            <nav>
-                <a href="index.ejs" class="nav-item">
-                    <i class="fa-solid fa-chart-line icon"></i> 
+            <nav style="flex-grow: 1;">
+                <a href="index.php" class="nav-item ">
+                    <i class="fa-solid fa-table-columns"></i> 
                     <span>Dashboard</span>
                 </a>
-                <a href="inventory.ejs" class="nav-item">
-                    <i class="fa-solid fa-boxes-packing icon"></i> 
-                    <span>Inventory</span>
+                <a href="transfer_request.php" class="nav-item">
+                    <i class="fa-solid fa-right-left"></i> 
+                    <span>Transfer Request</span>
                 </a>
-                <a href="orders.ejs" class="nav-item active">
-                    <i class="fa-solid fa-cart-shopping icon"></i> 
-                    <span>Orders</span>
+                <a href="track_status.php" class="nav-item">
+                    <i class="fa-solid fa-arrows-spin"></i> 
+                    <span>Track Status</span>
                 </a>
-                <a href="reports.ejs" class="nav-item">
-                    <i class="fa-solid fa-file-invoice-dollar icon"></i> 
-                    <span>Reports</span>
+                <a href="basic_updates.php" class="nav-item ">
+                    <i class="fa-solid fa-pen-to-square"></i> 
+                    <span>Basic Updates</span>
                 </a>
-                <a href="supplies.ejs" class="nav-item">
+                 <a href="orders.php" class="nav-item active">
+                    <i class="fa-solid fa-pen-to-square"></i> 
+                    <span>Order</span>
+                </a>
+                <a href="sales.php" class="nav-item">
+                    <i class="fa-solid fa-chart-simple"></i> 
+                    <span>Sales</span>
+                </a>
+                <a href="supplies.php" class="nav-item ">
                     <i class="fa-solid fa-truck-ramp-box icon"></i> 
                     <span>Supplies</span>
                 </a>
-                <a href="settings.ejs" class="nav-item">
-                    <i class="fa-solid fa-gears icon"></i> 
-                    <span>Settings</span>
+                <a href="settings.php" class="nav-item">
+                    <i class="fa-solid fa-user-gear"></i> 
+                    <span>Profile</span>
                 </a>
             </nav>
 
@@ -185,6 +225,38 @@
                 </table>
 
                 <button class="refresh-btn">Refresh</button>
+                <button class="refresh-btn" onclick="openForm()">Add Customers</button>
+
+                <div id="popupForm" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeForm()">&times;</span>
+                    <h2 style="color: #e67e22;">Customers list</h2>
+
+                    <form>
+                        <label>Customer Name:</label>
+                        <input type="text" name="customer_name" required>
+
+                        <label>Product:</label>
+                        <input type="text" name="product" required>
+
+                        <label>Quantity:</label>
+                        <input type="number" name="quantity" required>
+
+                        <label>Status:</label>
+                        <select name="status" required>
+                            <option value="">Select Status</option>
+                            <option value="Pending">Pending</option>
+                            <option value="Processing">Processing</option>
+                            <option value="Delivered">Delivered</option>
+                        </select>
+
+                        <label>Estimated Delivery:</label>
+                        <input type="date" name="estimated_delivery" required>
+
+                        <button type="submit" style="color: #e67e22;">Save</button>
+                    </form>
+                </div>
+                </div>
             </section>
         </main>
     </div>
@@ -196,6 +268,14 @@
         toggleBtn.addEventListener('click', () => {
             sidebar.classList.toggle('collapsed');
         });
+
+        function openForm() {
+        document.getElementById("popupForm").style.display = "block";
+        }
+
+        function closeForm() {
+        document.getElementById("popupForm").style.display = "none";
+        }
     </script>
 </body>
 </html>

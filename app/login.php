@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             ?>
             <script>
-                alert("Invalid email or password. Please try again.");
+                alert("Invalid email or wrong password. Please try again.");
             </script>
             <?php
         }

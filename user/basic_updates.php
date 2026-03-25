@@ -89,13 +89,21 @@
                     <i class="fa-solid fa-arrows-spin"></i> 
                     <span>Track Status</span>
                 </a>
-                <a href="basic_updates.php" class="nav-item active">
+                <a href="basic_updates.php" class="nav-item active ">
                     <i class="fa-solid fa-pen-to-square"></i> 
                     <span>Basic Updates</span>
+                </a>
+                 <a href="orders.php" class="nav-item">
+                    <i class="fa-solid fa-pen-to-square"></i> 
+                    <span>Order</span>
                 </a>
                 <a href="sales.php" class="nav-item">
                     <i class="fa-solid fa-chart-simple"></i> 
                     <span>Sales</span>
+                </a>
+                <a href="supplies.php" class="nav-item ">
+                    <i class="fa-solid fa-truck-ramp-box icon"></i> 
+                    <span>Supplies</span>
                 </a>
                 <a href="settings.php" class="nav-item">
                     <i class="fa-solid fa-user-gear"></i> 

@@ -67,7 +67,7 @@ if (!isset($_SESSION['user_id'])) {
                 <i class="fa-solid fa-boxes-stacked"></i> 
                 <span>Title</span>
             </div>
-            <nav style="flex-grow: 1;">
+             <nav style="flex-grow: 1;">
                 <a href="index.php" class="nav-item ">
                     <i class="fa-solid fa-table-columns"></i> 
                     <span>Dashboard</span>
@@ -80,13 +80,21 @@ if (!isset($_SESSION['user_id'])) {
                     <i class="fa-solid fa-arrows-spin"></i> 
                     <span>Track Status</span>
                 </a>
-                <a href="basic_updates.php" class="nav-item">
+                <a href="basic_updates.php" class="nav-item ">
                     <i class="fa-solid fa-pen-to-square"></i> 
                     <span>Basic Updates</span>
+                </a>
+                 <a href="orders.php" class="nav-item">
+                    <i class="fa-solid fa-pen-to-square"></i> 
+                    <span>Order</span>
                 </a>
                 <a href="sales.php" class="nav-item active">
                     <i class="fa-solid fa-chart-simple"></i> 
                     <span>Sales</span>
+                </a>
+                <a href="supplies.php" class="nav-item ">
+                    <i class="fa-solid fa-truck-ramp-box icon"></i> 
+                    <span>Supplies</span>
                 </a>
                 <a href="settings.php" class="nav-item">
                     <i class="fa-solid fa-user-gear"></i> 
@@ -106,7 +114,7 @@ if (!isset($_SESSION['user_id'])) {
 
             <section class="sales-card">
                 <div class="sales-header">
-                    <h2><i class="fa-solid fa-coins" style="color: #f28c28;"></i> Recent Sales (PHP)</h2>
+                    <h2><i class="fa-solid fa-coins" style="color: #f28c28;"></i> Recent Sale</h2>
                 </div>
 
                 <table class="sales-table">
