@@ -80,10 +80,6 @@ if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
                 <a href="sales.php" class="nav-item">
                     <i class="fa-solid fa-chart-simple"></i> 
                     <span>Sales</span>
-
-                <a href="products.php" class="nav-item">
-                    <i class="fa-solid fa-cart-plus"></i> 
-                    <span>Add Products</span>
                 </a>
                 <a href="supplies.php" class="nav-item ">
                     <i class="fa-solid fa-truck-ramp-box icon"></i> 
