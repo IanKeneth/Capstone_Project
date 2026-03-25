@@ -6,8 +6,9 @@
     <title>Inventory Admin Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="inventory-style.css">
     <style>
-         .quick-overview { margin-bottom: 25px; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; }
+        .quick-overview { margin-bottom: 25px; border: 1px solid #ddd; border-radius: 8px; overflow: hidden; }
         .card-header { background: #fff; padding: 15px; border-bottom: 1px solid #eee; display: flex; align-items: center; gap: 10px; color: #555; }
         
         .gauge-container { display: flex; justify-content: space-around; padding: 25px; background: #fff; flex-wrap: wrap; gap: 20px; }
@@ -20,6 +21,21 @@
         .yellow { border-top-color: #f1c40f; border-right-color: #f1c40f; }
         .green { border-top-color: #2ecc71; border-right-color: #2ecc71; border-left-color: #2ecc71;}
 
+        
+        .d-flex {
+            display: flex;
+            align-items: center;
+        }
+
+        .gap-2 {
+            gap: 8px;
+        }
+        .btn{
+            text-decoration:none;
+            color:orangered;
+            background-color: transparent;
+            border: 1px solid #e67e22;
+        }
     </style>
 </head>
 <body>
@@ -44,7 +60,6 @@
                     <i class="fa-solid fa-file-invoice-dollar icon"></i> 
                     <span>Reports</span>
                 </a>
-
                 <a href="/User-management" class="nav-item">
                     <i class="fa-solid fa-users icon"></i> 
                     <span>User Management</span>
@@ -71,88 +86,63 @@
                     <button id="sidebarToggle" class="hamburger-btn">
                         <i class="fa-solid fa-bars"></i>
                     </button>
-                    <h1>Dashboard</h1>
+                    <h1>User Management</h1>
                 </div>
                 <div class="user-profile">
                     <i class="fa-solid fa-circle-user"></i>
                 </div>
             </header>
-             <section class="quick-overview">
-                <div class="card-header">
-                    <i class="fa-solid fa-layer-group" style="color: var(--primary-orange);"></i>
-                    <strong>Quick Inventory Overview</strong>
+            <section class="inventory-list-card">
+                <div class="card-header" style="margin: 10px ;">
+                    <i class="fa-solid fa-file-lines" style="color: var(--primary-orange);"></i>
+                    <strong>list of users</strong>
                 </div>
-                <div class="gauge-container">
-                    <div class="gauge-item">
-                        <div class="gauge-circle blue"><span>1000</span></div>
-                        <p>TOTAL Units</p>
-                    </div>
-                    <div class="gauge-item">
-                        <div class="gauge-circle red"><span>87</span></div>
-                        <p>LOW Stock</p>
-                    </div>
-                    <div class="gauge-item">
-                        <div class="gauge-circle yellow"><span>5000</span></div>
-                        <p>STOCK VALUE</p>
-                    </div>
-                    <div class="gauge-item">
-                        <div class="gauge-circle green"><span>+45</span></div>
-                        <p>UPDATES (24h)</p>
-                    </div>
-                </div>
-            </section>
-            <section class="analytics-row">
-                <div class="card sales-analytics">
-                    <h3><i class="fa-solid fa-chart-area" style="color: #f28c28; margin-right: 10px;"></i>Sales Analytics</h3>
-                    <div class="chart-placeholder">
-                        </div>
-                </div>
-
-                <div class="card sales-stat">
-                    <h3>Total Sales</h3>
-                    <div class="stat-value">$142,500</div>
-                    <div class="stat-change">
-                        <i class="fa-solid fa-arrow-trend-up"></i> +12% from last month
-                    </div>
-                </div>
-            </section>
-
-            <section class="data-row">
-                <div class="card stock-levels">
-                    <h3><i class="fa-solid fa-layer-group" style="color: #f28c28; margin-right: 10px;"></i>Current Stock Level</h3>
-                    <ul>
-                        <li><span>Brooms</span> <strong>1500 units</strong></li>
-                        <li><span>Doormats</span> <strong>850 units</strong></li>
-                        <li><span>Brushes</span> <strong>2100 units</strong></li>
-                        <li><span>Buckets</span> <strong>1200 units</strong></li>
-                    </ul>
-                </div>
-
-                <div class="card recent-orders">
-                    <h3><i class="fa-solid fa-clock-rotate-left" style="color: #f28c28; margin-right: 10px;"></i>Recent Orders</h3>
-                    <table>
+                <div style="padding: 0 15px 15px 15px;">
+                    <table class="inventory-table">
                         <thead>
                             <tr>
-                                <th>Order ID</th>
-                                <th>Quantity</th>
-                                <th>Status</th>
+                                <th>ID</th>
+                                <th>FULL NAME</th>
+                                <th>EMAIL</th>
+                                <th>PASSWORD</th>
+                                <th>ROLE</th>
+                                <th>CREATED_AT</th>
+                                <th>ACTIONS</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>#CS001</td>
-                                <td>50 pcs</td>
-                                <td class="status-shipped"><i class="fa-solid fa-circle-check"></i> Shipped</td>
-                            </tr>
-                            <tr>
-                                <td>#CS002</td>
-                                <td>120 pcs</td>
-                                <td class="status-pending"><i class="fa-solid fa-circle-dot"></i> Pending</td>
-                            </tr>
-                        </tbody>
+                        
+                                    <% 
+                                    if(student.length> 0){
+                                        student.forEach((mydata)=>{
+
+                            
+                                    %>
+                                    <tr>
+                                        <td><%- mydata.id %></td>
+                                        <td><%- mydata.name %></td>
+                                        <td><%- mydata.email %></td>
+                                        <td>*************</td>
+                                        <td><%- mydata.role %></td>
+                                        <td><%- mydata.created_at %></td>
+                                        <td>
+                                            <div class="d-flex gap-2">
+                                                <a href="/delete/<%-mydata.id%>"  class="btn btn-danger">Delete</a>
+                                                <a href="/update/<%-mydata.id%>" class="btn btn-danger">Update</a>
+                                            </div>
+                                        </td>
+                    
+                                    </tr>
+                                    <%
+                                        });
+                                    }
+                                    %>
+                    </tbody>
                     </table>
-                </div>
             </section>
+        </main>
+    </div>
+
         </main>
     </div>
 

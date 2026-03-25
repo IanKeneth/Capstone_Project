@@ -111,13 +111,9 @@
                     <i class="fa-solid fa-right-left"></i> 
                     <span>Transfer Request</span>
                 </a>
-                <a href="track_status.php" class="nav-item">
-                    <i class="fa-solid fa-arrows-spin"></i> 
-                    <span>Track Status</span>
-                </a>
-                <a href="basic_updates.php" class="nav-item ">
+                <a href="basic_reports.php" class="nav-item ">
                     <i class="fa-solid fa-pen-to-square"></i> 
-                    <span>Basic Updates</span>
+                    <span>Basic Reports</span>
                 </a>
                  <a href="orders.php" class="nav-item ">
                     <i class="fa-solid fa-pen-to-square"></i> 
@@ -221,30 +217,30 @@
                 <button class="refresh-btn" onclick="openForm()">Add Supplies</button>
 
                 <div id="popupForm" class="modal">
-                <div class="modal-content">
-                    <span class="close" onclick="closeForm()">&times;</span>
-                    <h2 style="color: #e67e22;">Supplies list</h2>
+                    <div class="modal-content">
+                        <span class="close" onclick="closeForm()">&times;</span>
+                        <h2 style="color: #e67e22;">Supplies list</h2>
 
-                    <form>
-                        <label>Customer Name:</label>
-                        <input type="text" name="customer_name" required>
+                        <form>
+                            <label>Customer Name:</label>
+                            <input type="text" name="customer_name" required>
 
-                        <label>Product:</label>
-                        <input type="text" name="product" required>
+                            <label>Product:</label>
+                            <input type="text" name="product" required>
 
-                        <label>Quantity:</label>
-                        <input type="number" name="quantity" required>
+                            <label>Quantity:</label>
+                            <input type="number" name="quantity" required>
 
-                        <label>time added:</label>
-                        <input type="date" name="estimated_delivery" required>
+                            <label>time added:</label>
+                            <input type="date" name="estimated_delivery" required>
 
-                        <button type="submit" style="color: #e67e22;">Add</button>
-                    </form>
-                </div>
-                </div>
-            </section>
-        </main>
-    </div>
+                            <button type="submit" style="color: #e67e22;">Add</button>
+                        </form>
+                    </div>
+                    </div>
+                </section>
+            </main>
+        </div>
 
     <script>
         const sidebar = document.querySelector('.sidebar');

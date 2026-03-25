@@ -65,13 +65,10 @@ if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
                     <i class="fa-solid fa-right-left"></i> 
                     <span>Transfer Request</span>
                 </a>
-                <a href="track_status.php" class="nav-item">
-                    <i class="fa-solid fa-arrows-spin"></i> 
-                    <span>Track Status</span>
-                </a>
-                <a href="basic_updates.php" class="nav-item">
+        
+                <a href="basic_reports.php" class="nav-item">
                     <i class="fa-solid fa-pen-to-square"></i> 
-                    <span>Basic Updates</span>
+                    <span>Basic Reports</span>
                 </a>
                 <a href="orders.php" class="nav-item">
                     <i class="fa-solid fa-pen-to-square"></i> 
@@ -81,10 +78,7 @@ if (!isset($_SESSION['user_id']) || empty($_SESSION['user_id'])) {
                     <i class="fa-solid fa-chart-simple"></i> 
                     <span>Sales</span>
 
-                <a href="products.php" class="nav-item">
-                    <i class="fa-solid fa-cart-plus"></i> 
-                    <span>Add Products</span>
-                </a>
+                    
                 <a href="supplies.php" class="nav-item ">
                     <i class="fa-solid fa-truck-ramp-box icon"></i> 
                     <span>Supplies</span>
