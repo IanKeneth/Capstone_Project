@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Orders - Admin Dashboard</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="../user/css/style.css">
+    <link rel="stylesheet" href="/style.css">
     <style>
         .order-section { padding: 20px; }
         
@@ -48,17 +48,6 @@
         .status-delivered { color: #27ae60; font-weight: 500; }
         .status-processing { color: #e67e22; font-weight: 500; }
         
-        .refresh-btn {
-            float: right;
-            margin-top: 20px;
-            background-color: #f28c28;
-            color: white;
-            border: none;
-            padding: 10px 30px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: bold;
-        }
         .modal {
             display: none;
             position: fixed;
@@ -91,6 +80,17 @@
             cursor: pointer;
             font-size: 20px;
         }
+          .refresh-btn {
+            float: right;
+            margin-top: 20px;
+            background-color: #f28c28;
+            color: white;
+            border: none;
+            padding: 10px 30px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -102,45 +102,41 @@
                 <span>Title</span>
             </div>
 
-            <nav style="flex-grow: 1;">
-                <a href="index.php" class="nav-item ">
-                    <i class="fa-solid fa-table-columns"></i> 
+              <nav>
+                <a href="/index" class="nav-item">
+                    <i class="fa-solid fa-chart-line icon"></i> 
                     <span>Dashboard</span>
                 </a>
-                <a href="transfer_request.php" class="nav-item">
-                    <i class="fa-solid fa-right-left"></i> 
-                    <span>Transfer Request</span>
+                <a href="/inventory" class="nav-item">
+                    <i class="fa-solid fa-boxes-packing icon"></i> 
+                    <span>Inventory</span>
                 </a>
-                <a href="basic_reports.php" class="nav-item ">
-                    <i class="fa-solid fa-pen-to-square"></i> 
-                    <span>Basic Reports</span>
-                </a>
-                 <a href="orders.php" class="nav-item ">
-                    <i class="fa-solid fa-pen-to-square"></i> 
-                    <span>Order</span>
-                </a>
-                <a href="sales.php" class="nav-item">
-                    <i class="fa-solid fa-chart-simple"></i> 
-                    <span>Sales</span>
-                </a>
-                <a href="supplies.php" class="nav-item active">
+                <a href="/supplies" class="nav-item active">
                     <i class="fa-solid fa-truck-ramp-box icon"></i> 
                     <span>Supplies</span>
                 </a>
-                <a href="settings.php" class="nav-item">
-                    <i class="fa-solid fa-user-gear"></i> 
-                    <span>Profile</span>
+                <a href="/track&reports" class="nav-item">
+                    <i class="fa-solid fa-file-invoice-dollar icon"></i> 
+                    <span>Track & Reports</span>
+                </a>
+
+                <a href="/User-management" class="nav-item">
+                    <i class="fa-solid fa-users icon"></i> 
+                    <span>User Management</span>
+                </a>
+                <a href="/settings" class="nav-item">
+                    <i class="fa-solid fa-gears icon"></i> 
+                    <span>Settings</span>
                 </a>
             </nav>
 
             <div class="sidebar-footer">
-                <a href="http://localhost/capstone/app/login.php" class="nav-item">
+                <a href="/logout" class="nav-item">
                     <i class="fa-solid fa-right-from-bracket icon"></i> 
                     <span>Logout</span>
                 </a>
             </div>
-        </aside>
-
+            </aside>
         <main class="main-content">
             <header class="header">
                 <div class="header-left">
@@ -161,6 +157,7 @@
                     <thead>
                         <tr>
                             <th>Supply ID</th>
+                            <th>Supplier Name</th>
                             <th>Product Name</th>
                             <th>Quantity</th>
                             <th>Time Added</th>
@@ -168,44 +165,51 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>CS001</td>
+                            <td>1</td>
+                            <td>John</td>
                             <td>Brooms</td>
                             <td>90 pcs</td>
                             <td>2026-03-20</td>
                         </tr>
                         <tr>
-                            <td>CS002</td>
+                            <td>2</td>
+                            <td>Doe</td>
                             <td>Buckets</td>
                             <td>50 pcs</td>
                             <td>2026-04-03</td>
                         </tr>
                         <tr>
-                            <td>CS003</td>
+                            <td>3</td>
+                            <td>Dow</td>
                             <td>Brushes</td>
                             <td>70 pcs</td>
                             <td>2026-03-07</td>
                         </tr>
                         <tr>
-                            <td>CS004</td>
+                            <td>4</td>
+                            <td>Herl</td>
                             <td>Doormats</td>
                             <td>120 pcs</td>
                             <td>2026-03-12</td>
                         </tr>
                         <tr>
-                            <td>CS005</td>
+                            <td>5</td>
+                            <td>Han</td>
                             <td>Buckets & Pads</td>
                             <td>50 pcs</td>
                             <td>2026-03-12</td>
                         </tr>
                         <tr>
-                            <td>CS002</td>
+                            <td>6</td>
+                            <td>Hen</td>
                             <td>Brooms</td>
                             <td>30 pcs</td>
                             <td>2026-03-12</td>
                         
                         </tr>
                         <tr>
-                            <td>CS006</td>
+                            <td>7</td>
+                            <td>Hon</td>
                             <td>Brushes</td>
                             <td>70 pcs</td>
                             <td>2026-03-12</td>
@@ -219,10 +223,10 @@
                 <div id="popupForm" class="modal">
                     <div class="modal-content">
                         <span class="close" onclick="closeForm()">&times;</span>
-                        <h2 style="color: #e67e22;">Supplies list</h2>
+                        <h2 style="color: #e67e22;">Supplies</h2>
 
                         <form>
-                            <label>Customer Name:</label>
+                            <label>Supplier Name:</label>
                             <input type="text" name="customer_name" required>
 
                             <label>Product:</label>
@@ -237,10 +241,11 @@
                             <button type="submit" style="color: #e67e22;">Add</button>
                         </form>
                     </div>
-                    </div>
-                </section>
+                </div>
+                
             </main>
         </div>
+    </section>
 
     <script>
         const sidebar = document.querySelector('.sidebar');

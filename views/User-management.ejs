@@ -48,7 +48,7 @@
             </div>
 
             <nav>
-                <a href="/index" class="nav-item active">
+                <a href="/index" class="nav-item ">
                     <i class="fa-solid fa-chart-line icon"></i> 
                     <span>Dashboard</span>
                 </a>
@@ -56,11 +56,15 @@
                     <i class="fa-solid fa-boxes-packing icon"></i> 
                     <span>Inventory</span>
                 </a>
-                <a href="/reports" class="nav-item">
-                    <i class="fa-solid fa-file-invoice-dollar icon"></i> 
-                    <span>Reports</span>
+                <a href="/supplies" class="nav-item a">
+                    <i class="fa-solid fa-truck-ramp-box icon"></i> 
+                    <span>Supplies</span>
                 </a>
-                <a href="/User-management" class="nav-item">
+                <a href="/track&reports" class="nav-item">
+                    <i class="fa-solid fa-file-invoice-dollar icon"></i> 
+                    <span>Track & Reports</span>
+                </a>
+                <a href="/User-management" class="nav-item active">
                     <i class="fa-solid fa-users icon"></i> 
                     <span>User Management</span>
                 </a>
@@ -110,33 +114,32 @@
                                 <th>ACTIONS</th>
                             </tr>
                         </thead>
-                        <tbody>
-                        
-                                    <% 
-                                    if(student.length> 0){
-                                        student.forEach((mydata)=>{
+                        <tbody>               
+                        <% 
+                        if(student.length> 0){
+                        student.forEach((mydata)=>{
 
                             
-                                    %>
-                                    <tr>
-                                        <td><%- mydata.id %></td>
-                                        <td><%- mydata.name %></td>
-                                        <td><%- mydata.email %></td>
-                                        <td>*************</td>
-                                        <td><%- mydata.role %></td>
-                                        <td><%- mydata.created_at %></td>
-                                        <td>
-                                            <div class="d-flex gap-2">
-                                                <a href="/delete/<%-mydata.id%>"  class="btn btn-danger">Delete</a>
-                                                <a href="/update/<%-mydata.id%>" class="btn btn-danger">Update</a>
-                                            </div>
-                                        </td>
+                        %>
+                        <tr>
+                        <td><%- mydata.id %></td>
+                        <td><%- mydata.name %></td>
+                        <td><%- mydata.email %></td>
+                        <td>*************</td>
+                        <td><%- mydata.role %></td>
+                        <td><%- mydata.created_at %></td>
+                        <td>
+                        <div class="d-flex gap-2">
+                            <a href="/delete/<%-mydata.id%>"  class="btn btn-danger">Delete</a>
+                            <a href="/update/<%-mydata.id%>" class="btn btn-danger">Update</a>
+                        </div>
+                        </td>
                     
-                                    </tr>
-                                    <%
-                                        });
-                                    }
-                                    %>
+                        </tr>
+                        <%
+                                });
+                            }
+                        %>
                     </tbody>
                     </table>
             </section>

@@ -124,10 +124,7 @@
                     <i class="fa-solid fa-chart-simple"></i> 
                     <span>Sales</span>
                 </a>
-                <a href="supplies.php" class="nav-item ">
-                    <i class="fa-solid fa-truck-ramp-box icon"></i> 
-                    <span>Supplies</span>
-                </a>
+                
                 <a href="settings.php" class="nav-item">
                     <i class="fa-solid fa-user-gear"></i> 
                     <span>Profile</span>

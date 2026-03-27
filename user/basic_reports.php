@@ -9,7 +9,7 @@
     <style>
         .updates-container { padding: 20px; display: flex; justify-content: center; }
         .updates-card {
-            background: #fffdf8; /* Creamy background from image */
+            background: #fffdf8;
             border: 1px solid #e0e0e0;
             border-radius: 8px;
             width: 100%;
@@ -97,10 +97,6 @@
                 <a href="sales.php" class="nav-item">
                     <i class="fa-solid fa-chart-simple"></i> 
                     <span>Sales</span>
-                </a>
-                <a href="supplies.php" class="nav-item ">
-                    <i class="fa-solid fa-truck-ramp-box icon"></i> 
-                    <span>Supplies</span>
                 </a>
                 <a href="settings.php" class="nav-item">
                     <i class="fa-solid fa-user-gear"></i> 

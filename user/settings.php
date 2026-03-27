@@ -221,7 +221,7 @@
                     <i class="fa-solid fa-pen-to-square"></i> 
                     <span>Basic Reports</span>
                 </a>
-                 <a href="orders.php" class="nav-item active">
+                 <a href="orders.php" class="nav-item ">
                     <i class="fa-solid fa-pen-to-square"></i> 
                     <span>Order</span>
                 </a>
@@ -229,11 +229,8 @@
                     <i class="fa-solid fa-chart-simple"></i> 
                     <span>Sales</span>
                 </a>
-                <a href="supplies.php" class="nav-item ">
-                    <i class="fa-solid fa-truck-ramp-box icon"></i> 
-                    <span>Supplies</span>
-                </a>
-                <a href="settings.php" class="nav-item">
+                
+                <a href="settings.php" class="nav-item active">
                     <i class="fa-solid fa-user-gear"></i> 
                     <span>Profile</span>
                 </a>
